@@ -1,4 +1,4 @@
-package sda.hiberate3;
+package sda.hiberate3.config;
 
 import static org.junit.Assert.assertTrue;
 
