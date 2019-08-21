@@ -12,7 +12,6 @@ public class HibernateUtils {
             .configure()
             .buildSessionFactory();
 
-
     //otwiera sesje z bazą:
 
     private static Session session = sf.openSession();

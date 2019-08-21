@@ -12,16 +12,18 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">antykombatant</property>
     <property name="hibernate.connection.useSSL">false</property>
-    <property name="show_sql">true</property>
+    <property name="show_sql">false</property>
     <property name="hbm2ddl.auto">update</property>
 
     <!-- DB schema will be updated if needed -->
 
-
-
-
     <mapping class="sda.hiberate3.config.model.User"></mapping>
     <mapping class="sda.hiberate3.config.model.Game"></mapping>
+    <mapping class="sda.hiberate3.config.model.Cart"></mapping>
+    <mapping class="sda.hiberate3.config.model.DateTime"></mapping>
+    <mapping class="sda.hiberate3.config.model.GameHero_klasaRozdzielona"></mapping>
+    <mapping class="sda.hiberate3.config.model.GameVillain"></mapping>
+
 
 
 </session-factory>
