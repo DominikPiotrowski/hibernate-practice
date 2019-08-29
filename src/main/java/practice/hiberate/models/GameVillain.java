@@ -1,11 +1,8 @@
-package sda.hiberate3.config.model;
-
-import lombok.Getter;
-import lombok.Setter;
+package practice.hiberate.models;
 
 import javax.persistence.*;
 
-////////klasa GameVillainPowers jest teraz osadzona-- @Embedable - @Embeded///////////
+// GameVillainPowers is @Embeded
 
 @Entity
 @Table(name = "GameVillain")
@@ -22,7 +19,7 @@ public class GameVillain {
     private String villainRealName;
 
     @Embedded
-    private GameVillainPowers_klasaOsadzona villainPowers;
+    private GameVillainPowersEmbeded villainPowers;
 
     public GameVillain() {
     }
@@ -51,11 +48,11 @@ public class GameVillain {
         this.villainRealName = villainRealName;
     }
 
-    public GameVillainPowers_klasaOsadzona getVillainPowers() {
+    public GameVillainPowersEmbeded getVillainPowers() {
         return villainPowers;
     }
 
-    public void setVillainPowers(GameVillainPowers_klasaOsadzona villainPowers) {
+    public void setVillainPowers(GameVillainPowersEmbeded villainPowers) {
         this.villainPowers = villainPowers;
     }
 }

@@ -7,7 +7,7 @@
 <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/company</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sampleDatabase</property>
     <property name="hibernate.connection.serverTimezone">UCT</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">antykombatant</property>
@@ -15,17 +15,11 @@
     <property name="show_sql">false</property>
     <property name="hbm2ddl.auto">update</property>
 
-    <!-- DB schema will be updated if needed -->
-
-    <mapping class="sda.hiberate3.config.model.User"></mapping>
-    <mapping class="sda.hiberate3.config.model.Game"></mapping>
-    <mapping class="sda.hiberate3.config.model.Cart"></mapping>
-    <mapping class="sda.hiberate3.config.model.DateTime"></mapping>
-    <mapping class="sda.hiberate3.config.model.GameHero_klasaRozdzielona"></mapping>
-    <mapping class="sda.hiberate3.config.model.GameVillain"></mapping>
-
-
-
+    <mapping class="practice.hiberate.models.User"></mapping>
+    <mapping class="practice.hiberate.models.Game"></mapping>
+    <mapping class="practice.hiberate.models.Cart"></mapping>
+    <mapping class="practice.hiberate.models.DateTime"></mapping>
+    <mapping class="practice.hiberate.models.GameHeroDivided"></mapping>
+    <mapping class="practice.hiberate.models.GameVillain"></mapping>
 </session-factory>
-
 </hibernate-configuration>

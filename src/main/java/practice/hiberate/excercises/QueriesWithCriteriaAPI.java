@@ -1,11 +1,11 @@
-package sda.hiberate3.config.excercises;
+package practice.hiberate.excercises;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import sda.hiberate3.config.HibernateUtils;
-import sda.hiberate3.config.model.User;
+import practice.hiberate.HibernateUtils;
+import practice.hiberate.models.User;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -14,20 +14,18 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class Queries_criteriaAPI {
+public class QueriesWithCriteriaAPI {
 
-//ZAPYTANIA Z CRITERIA API:
-
-    public static void query7() {
+    public static void getUserByNameCriteriaApi() {
         Session session = HibernateUtils.getHibernateSession();
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
 
-        Root<User> root = criteriaQuery.from(User.class); //skąd
-        Path<String> activityStatus = root.get("name"); //na jakiej kolumnie
+        Root<User> root = criteriaQuery.from(User.class);
+        Path<String> userName = root.get("name");
 
-        criteriaQuery.select(root).where(builder.equal(activityStatus, "Olo")); //co sprawdzamy
+        criteriaQuery.select(root).where(builder.equal(userName, "Majkel"));
 
         TypedQuery<User> typedQuery = session.createQuery(criteriaQuery);
 
@@ -35,55 +33,63 @@ public class Queries_criteriaAPI {
         resultList.forEach(x -> System.out.println(x.toString()));
     }
 
-    public static void query8() {
+    public static void getSingleUserByIdCriteriaApi() {
         Session session = HibernateUtils.getHibernateSession();
-
         Criteria criteria = session.createCriteria(User.class);
         criteria.add(Restrictions.eq("id", 52));
 
         System.out.println(criteria.uniqueResult().toString());
     }
 
-    public static void query9() {
+    public static void getUsersByLastNameCriteriaApi() {
         Session session = HibernateUtils.getHibernateSession();
         Criteria criteria = session.createCriteria(User.class);
-        List<User> results = criteria.add(Restrictions.lt("id", 50)).list();
+
+        List<User> results = criteria.add(Restrictions.lt("lastName", "Filemon")).list();
         results.forEach(x -> System.out.println(x.toString()));
     }
 
-    public static void quer10() {
+    public static void getUserByIdMultiRestrictionsCriteriaApi() {
         Session session = HibernateUtils.getHibernateSession();
         Criteria criteria = session.createCriteria(User.class);
+
         List<User> results = criteria
-                .add(Restrictions.le("id", 50)) //less than or equal
-                .add(Restrictions.ge("id",20)) //laeger than or equal
-                .addOrder(Order.desc("id")).list();
+                .add(Restrictions.le("id", 50)) //less or equal
+                .add(Restrictions.ge("id",20)) //greater or equal
+                .addOrder(Order.desc("id"))
+                .list();
 
         results.forEach(x-> System.out.println(x.toString()));
     }
-    public static void query11() {
+
+    public static void getUserByNameLikeCriteriaApi() {
         Session session = HibernateUtils.getHibernateSession();
         Criteria criteria = session.createCriteria(User.class);
+
         List<User> results = criteria
                 .add(Restrictions.like("name", "Ol%"))
-                .addOrder(Order.asc("id")).list();
+                .addOrder(Order.asc("id"))
+                .list();
 
         results.forEach(x-> System.out.println(x.toString()));
     }
 
-    public static void query12() {
+    public static void getUserByIdBetweenCriteriaApi() {
         Session session = HibernateUtils.getHibernateSession();
         Criteria criteria = session.createCriteria(User.class);
+
         List<User> results = criteria
                 .add(Restrictions.between("id", 5, 50))
-                .addOrder(Order.asc("id")).list();
+                .addOrder(Order.asc("id"))
+                .list();
 
         results.forEach(x-> System.out.println(x.toString()));
     }
 
-    public static void query13() {
+    public static void getUserByIdRestrictionsBetweenCriteriaApi() {
         Session session = HibernateUtils.getHibernateSession();
         Criteria criteria = session.createCriteria(User.class);
+
         List<User> results = criteria
                 .add(Restrictions.or
                         (Restrictions.between("id", 5, 50),
@@ -91,5 +97,4 @@ public class Queries_criteriaAPI {
 
         results.forEach(x-> System.out.println(x.toString()));
     }
-
 }

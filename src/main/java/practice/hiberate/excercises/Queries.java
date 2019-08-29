@@ -1,60 +1,46 @@
-package sda.hiberate3.config.excercises;
+package practice.hiberate.excercises;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import sda.hiberate3.config.HibernateUtils;
-import sda.hiberate3.config.model.User;
+import practice.hiberate.HibernateUtils;
+import practice.hiberate.models.User;
 
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 public class Queries {
 
-    public static void query1() {
-
+    public static void getAllUsers() {
         Session session = HibernateUtils.getHibernateSession();
-
         List<User> userList = session.createQuery("FROM " + User.class.getName()).list();
+
         System.out.println(userList.toString() + "\n");
     }
 
-    public static void query2() {
-
+    public static void getUserByStaticLastName() {
         Session session = HibernateUtils.getHibernateSession();
-
         Query query = session.createQuery("SELECT u FROM User u WHERE u.lastName=:p");
         query.setParameter("p", "Piotrowski");
 
-//        List results = query.list();
-//        System.out.println(results);
-
-        //albo od razu:
         System.out.println(query.getResultList().toString());
     }
 
-    public static void query3(int id) {
-
+    public static void getUserById(int id) {
         Session session = HibernateUtils.getHibernateSession();
         Query query = session.createQuery("SELECT u FROM User u WHERE u.id=:x");
         query.setParameter("x", id);
+
         System.out.println(query.getSingleResult().toString());
     }
 
-    public static void query4(Enum status) {
-        Session session = HibernateUtils.getHibernateSession();
-        Query query = session.createQuery("SELECT u FROM User u WHERE u.activityStatus=:a");
-        query.setParameter("a", status);
-        System.out.println(query.getResultList().toString());
-    }
-
-////////////// query4 z printem do konsoli:
-
-    public static void query41(Enum status) {
+    public static void getUserByStatus(Enum status) {
         Session session = HibernateUtils.getHibernateSession();
         TypedQuery<User> query = session.createQuery("SELECT u FROM User u WHERE u.activityStatus=:a ORDER BY id");
         query.setParameter("a", status);
+
         List<User> activeUsers = query.getResultList();
 
         for (User user : activeUsers) {
@@ -64,31 +50,25 @@ public class Queries {
         }
     }
 
-//////////////wersja z iteratorem:
-
-    public static void query42(Enum status) {
+    public static void getUserByStatusWithIterator(Enum status) {
         Session session = HibernateUtils.getHibernateSession();
-        Query query = session.createQuery("SELECT CONCAT(u.name, ' ', u.lastName, ' '), u.activityStatus FROM User u WHERE u.activityStatus=:a");
+        Query query = session.createQuery(
+                "SELECT CONCAT(u.name, ' ', u.lastName, ' '), u.activityStatus FROM User u WHERE u.activityStatus=:a");
         query.setParameter("a", status);
 
-        //iterator po rezultatach tworzy tablicę obiektów nie wiemy jakiego typu
-
+        //iterator creates table of results
         Iterator<?> iterator = query.getResultList().iterator();
 
-        //pętla z rzutowaniem typu obiekt na string
-
+        //object to string and enum:
         while (iterator.hasNext()) {
             Object[] item = (Object[]) iterator.next();
-            String name = (String) item[0]; //pierwszy item w tablicy to imię
-            Enum stat = (Enum) item[1]; //drugi to enum status
-            System.out.println(name + stat);
+            String firstAndLastName = (String) item[0]; //first table item
+            Enum stat = (Enum) item[1]; //second table item
+            System.out.println(firstAndLastName + stat);
         }
-
     }
 
-/////////////zapytanie z dwoma parametrami:
-
-    public static void query5(int minimumId, int maximumId) {
+    public static void getUserByIdRange(int minimumId, int maximumId) {
         Session session = HibernateUtils.getHibernateSession();
         Query query = session.createQuery("SELECT u FROM User u WHERE u.id > ?1 AND u.id < ?2");
         query.setParameter(1, minimumId);
@@ -96,9 +76,6 @@ public class Queries {
 
         List<User> results = query.getResultList();
 
-//        for (User user : results) {
-//            System.out.println(user.getName() + " " + user.getLastName() + " " + user.getId());
-//        }
         results.forEach(x -> {
             x.getName();
             x.getLastName();
@@ -106,21 +83,16 @@ public class Queries {
         });
     }
 
-/////////////zapytanie z listą parametrów:
-
-    public static void query6() {
+    public static void getUserByNameList() {
         Session session = HibernateUtils.getHibernateSession();
         Query query = session.createQuery("SELECT u FROM User u WHERE u.lastName IN :names");
 
         List<String> names = new ArrayList<>();
-        names.add("Marx");
-        names.add("Jankiel");
-        names.add("Puszek");
+        names.addAll(Arrays.asList("Marx", "Jankiel", "Puszek"));
+
         query.setParameter("names", names);
 
         List<User> results = query.getResultList();
-//        for (User user : results) {
-//            System.out.println(user.getName() + " " + user.getLastName());
 
         results.forEach(x -> {
             x.getName();

@@ -1,20 +1,18 @@
-package sda.hiberate3.config.excercises;
+package practice.hiberate.excercises;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import sda.hiberate3.config.HibernateUtils;
+import practice.hiberate.HibernateUtils;
 
 public class QueriesWithFunctions {
 
-    public static void agregateQ1() {
+    public static void agregateQuery1() {
         Session session = HibernateUtils.getHibernateSession();
         Query query = session.createQuery("SELECT COUNT(e) FROM User e");
         System.out.println(query.getSingleResult());
     }
 
-    //tu zwracamy tablicę, od razu spraqdzamy kilka warunków
-
-    public static void agregateQ2() {
+    public static void agregateQuery2() {
         Session session = HibernateUtils.getHibernateSession();
         Query query = session.createQuery("SELECT MIN(e.id), MAX(e.id), AVG(e.id) FROM User e");
 
@@ -26,11 +24,13 @@ public class QueriesWithFunctions {
 
     public static void lancuchyZnakow() {
         Session session = HibernateUtils.getHibernateSession();
-        Query query = session.createQuery("SELECT substring(e.name, 1, 2), length(e.lastName) FROM User e WHERE e.name = 'Karol'");
+        Query query = session.createQuery(
+                "SELECT substring(e.name, 1, 2), length(e.lastName) FROM User e WHERE e.name = 'Karol'");
+
         Object[] results = (Object[]) query.getSingleResult();
         System.out.println(results[0]);
         System.out.println(results[1]);
 
-        //z przydatnych jeszcze: lower(), upper(), trim()
+        // lower(), upper(), trim()
     }
 }

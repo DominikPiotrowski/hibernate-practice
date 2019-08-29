@@ -1,11 +1,9 @@
-package sda.hiberate3.config.excercises;
+package practice.hiberate.excercises;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import sda.hiberate3.config.HibernateUtils;
-import sda.hiberate3.config.model.Game;
+import practice.hiberate.HibernateUtils;
 
 public class Deletes {
 

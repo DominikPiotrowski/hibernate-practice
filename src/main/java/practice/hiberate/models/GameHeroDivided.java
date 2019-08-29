@@ -1,18 +1,18 @@
-package sda.hiberate3.config.model;
+package practice.hiberate.models;
 
 import lombok.Getter;
 import lombok.Setter;
-import sda.hiberate3.config.excercises.EHeroSite;
+import practice.hiberate.excercises.EHeroSite;
 
 import javax.persistence.*;
 
-/////////////ROZDZIELAMY JEDEN MODEL NA DWIE TABELE W BAZIE///////////
+//one model into two tables
 
 @Entity
 @Table(name = "GameHeroData")
 @SecondaryTable(name = "GameHeroPower")
 
-public class GameHero_klasaRozdzielona {
+public class GameHeroDivided {
 
     @Getter
     @Setter
@@ -30,7 +30,6 @@ public class GameHero_klasaRozdzielona {
     @Column(table = "GameHeroData", name = "heroAge")
     private int age;
 
-
     @Column(table = "GameHeroPower", name = "heroPower")
     private String power;
 
@@ -38,10 +37,10 @@ public class GameHero_klasaRozdzielona {
     @Enumerated(EnumType.STRING)
     private EHeroSite heroSite;
 
-    public GameHero_klasaRozdzielona() {
+    public GameHeroDivided() {
     }
 
-    public GameHero_klasaRozdzielona(String name, String realName, int age, String power, EHeroSite heroSite) {
+    public GameHeroDivided(String name, String realName, int age, String power, EHeroSite heroSite) {
         this.name = name;
         this.realName = realName;
         this.age = age;

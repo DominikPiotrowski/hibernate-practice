@@ -1,4 +1,4 @@
-package sda.hiberate3.config.excercises;
+package practice.hiberate.excercises;
 
 public enum EActivity {
     ACTIVE, NONACTIVE, BANNED

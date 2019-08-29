@@ -1,4 +1,4 @@
-package sda.hiberate3.config.model;
+package practice.hiberate.models;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,8 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "Game")
-
+@Table
 public class Game {
 
     @Getter
@@ -24,7 +23,7 @@ public class Game {
     @Column(name = "publisher", nullable = false)
     private String publisher;
 
-    @Column(name = "price", nullable = false, precision = 6, scale = 2) //max 6 cyfr, 2 po przecinku
+    @Column(name = "price", nullable = false, precision = 6, scale = 2) //max 6 digits, two after coma
     private double price;
 
     @ManyToMany(mappedBy = "games")

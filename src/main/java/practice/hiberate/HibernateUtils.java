@@ -1,4 +1,4 @@
-package sda.hiberate3.config;
+package practice.hiberate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,13 +6,9 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtils {
 
-    //buduje sesję z bazą:
-
     private static final SessionFactory sf = new Configuration()
             .configure()
             .buildSessionFactory();
-
-    //otwiera sesje z bazą:
 
     private static Session session = sf.openSession();
 

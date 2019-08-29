@@ -1,4 +1,4 @@
-package sda.hiberate3.config.model;
+package practice.hiberate.models;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,14 +15,6 @@ public class DateTime {
     @Id
     private int id;
 
-    //można ustawic kolumny tabel tak:
-
-//    private java.sql.Date date;
-//    private java.sql.Time time;
-//    private java.sql.Timestamp timestamp;
-
-    //ale lepiej użyć adnotacji i pakietu util:
-
     @Temporal(TemporalType.DATE)
     private java.util.Date getGetUtilDate;
 
@@ -31,5 +23,4 @@ public class DateTime {
 
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date getUtilTimestamp;
-
 }
